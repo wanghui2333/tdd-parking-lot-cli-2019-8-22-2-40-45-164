@@ -20,6 +20,9 @@ public class ParkingLot {
     }
     
     public ParkingTicket park(Car car) {
+    	if(getAvailableParkingPosition() == 0) {
+    		return null;
+    	}
     	ParkingTicket parkingTicket = new ParkingTicket();
     	cars.put(parkingTicket, car);
 		return parkingTicket;
