@@ -14,6 +14,8 @@ public class ParkingBoy {
     	ParkingTicket parkingTicket = parkingLot.park(car);
     	if (parkingTicket == null) {
     		lastErrorMessage = "The parking lot is full.";
+		}else {
+			lastErrorMessage = null;
 		}
     	
         return parkingTicket;
