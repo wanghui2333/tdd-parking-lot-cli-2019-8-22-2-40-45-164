@@ -22,7 +22,11 @@ public class ParkingBoy {
  // 
     public Car fetch(ParkingTicket ticket) {
         // TODO: Please implement the method
-        return parkingLot.fetch(ticket);
+    	Car car = parkingLot.fetch(ticket);
+    	if (car == null) {
+			lastErrorMessage = "Unrecognized parking ticket.";
+		}
+        return car;
     }
 
     public String getLastErrorMessage() {
