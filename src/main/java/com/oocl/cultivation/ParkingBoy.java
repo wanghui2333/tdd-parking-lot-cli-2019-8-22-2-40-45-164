@@ -11,7 +11,12 @@ public class ParkingBoy {
 
     public ParkingTicket park(Car car) {
         // TODO: Please implement the method
-        return parkingLot.park(car);
+    	ParkingTicket parkingTicket = parkingLot.park(car);
+    	if (parkingTicket == null) {
+    		lastErrorMessage = "The parking lot is full.";
+		}
+    	
+        return parkingTicket;
     }
 
  // 
