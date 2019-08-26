@@ -2,15 +2,17 @@ package com.oocl.cultivation;
 
 import java.util.PriorityQueue;
 
-public class smartParkingBoy {
+public class SuperSmartParkingBoy {
 
 	private PriorityQueue<ParkingLot> parkingQueue = null;
 	private String lastErrorMessage;
 
-	public smartParkingBoy() {
-		this.parkingQueue = new PriorityQueue<ParkingLot>((x, y) -> 
-			-(x.getAvailableParkingPosition() - y.getAvailableParkingPosition())
-		);
+	public SuperSmartParkingBoy() {
+		this.parkingQueue = new PriorityQueue<ParkingLot>((x, y) -> {
+			double one = (double) x.getAvailableParkingPosition() / x.getCapacity();
+			double two = (double) y.getAvailableParkingPosition() / y.getCapacity();
+			return Double.compare(one, two);
+		});
 	}
 
 	public void addParkingLot(ParkingLot parkingLot) {
@@ -22,7 +24,7 @@ public class smartParkingBoy {
 		ParkingLot parkingLot = getParkingQueue().poll();
 		ParkingTicket parkingTicket = parkingLot.park(car);
 		addParkingLot(parkingLot);
-		
+
 		if (parkingTicket == null) {
 			lastErrorMessage = "The parking lot is full.";
 		} else {
@@ -66,7 +68,5 @@ public class smartParkingBoy {
 	public void setParkingQueue(PriorityQueue<ParkingLot> parkingQueue) {
 		this.parkingQueue = parkingQueue;
 	}
-	
-	
 
 }

@@ -4,7 +4,8 @@ import com.oocl.cultivation.Car;
 import com.oocl.cultivation.ParkingBoy;
 import com.oocl.cultivation.ParkingLot;
 import com.oocl.cultivation.ParkingTicket;
-import com.oocl.cultivation.smartParkingBoy;
+import com.oocl.cultivation.SmartParkingBoy;
+import com.oocl.cultivation.SuperSmartParkingBoy;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,6 +13,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.awt.List;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 class ParkingBoyFacts {
 	@Test
@@ -186,7 +189,7 @@ class ParkingBoyFacts {
 		Car car3 = new Car();
 		Car car4 = new Car();
 		
-		smartParkingBoy smartParkingBoy = new smartParkingBoy();
+		SmartParkingBoy smartParkingBoy = new SmartParkingBoy();
 
 		smartParkingBoy.addParkingLot(parkingLot);
 		smartParkingBoy.addParkingLot(parkingLot2);
@@ -200,6 +203,39 @@ class ParkingBoyFacts {
 		Car fetch3 = parkingLot.fetch(parkingTicket3);
 		Car fetch4 = parkingLot2.fetch(parkingTicket4);
 		
+		
+		assertSame(car, fetch);
+		assertSame(car2, fetch2);
+		assertSame(car3, fetch3);
+		assertSame(car4, fetch4);
+
+		
+		Map<String, String> map = new HashMap<String, String>();
+	}
+	
+	@Test
+	void should_park_mutl_car_to_superSmartBoy_parking_lot_and_get_it_back() {
+		final int capacity = 2;
+		ParkingLot parkingLot = new ParkingLot(100);
+		ParkingLot parkingLot2 = new ParkingLot(capacity);
+		Car car = new Car();
+		Car car2 = new Car();
+		Car car3 = new Car();
+		Car car4 = new Car();
+		
+		SuperSmartParkingBoy superSmartParkingBoy= new SuperSmartParkingBoy();
+
+		superSmartParkingBoy.addParkingLot(parkingLot);
+		superSmartParkingBoy.addParkingLot(parkingLot2);
+		ParkingTicket parkingTicket = superSmartParkingBoy.park(car);
+		ParkingTicket parkingTicket2 = superSmartParkingBoy.park(car2);
+		ParkingTicket parkingTicket3 = superSmartParkingBoy.park(car3);
+		ParkingTicket parkingTicket4 = superSmartParkingBoy.park(car4);
+		
+		Car fetch = parkingLot.fetch(parkingTicket);
+		Car fetch2 = parkingLot.fetch(parkingTicket2);
+		Car fetch3 = parkingLot.fetch(parkingTicket3);
+		Car fetch4 = parkingLot.fetch(parkingTicket4);
 		
 		assertSame(car, fetch);
 		assertSame(car2, fetch2);
