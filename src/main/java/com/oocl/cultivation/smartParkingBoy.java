@@ -8,19 +8,9 @@ public class smartParkingBoy {
 	private String lastErrorMessage;
 
 	public smartParkingBoy() {
-		this.parkingQueue = new PriorityQueue<ParkingLot>((x, y) -> {
-			
-			return -(x.getAvailableParkingPosition() - y.getAvailableParkingPosition());
-			
-		});
-//		this.parkingQueue = new PriorityQueue<ParkingLot>(new Comparator<ParkingLot>() {
-//
-//			@Override
-//			public int compare(ParkingLot one, ParkingLot two) {
-//				return -(one.getAvailableParkingPosition() - two.getAvailableParkingPosition());
-//			}
-//				
-//		});
+		this.parkingQueue = new PriorityQueue<ParkingLot>((x, y) -> 
+			-(x.getAvailableParkingPosition() - y.getAvailableParkingPosition())
+		);
 	}
 
 	public void addParkingLot(ParkingLot parkingLot) {
