@@ -1,17 +1,34 @@
 package com.oocl.cultivation;
 
+import java.util.ArrayList;
+
 public class ParkingBoy {
 
-    private final ParkingLot parkingLot;
+    private final ArrayList<ParkingLot> parkingList;
     private String lastErrorMessage;
 
     public ParkingBoy(ParkingLot parkingLot) {
-        this.parkingLot = parkingLot;
+    	ArrayList<ParkingLot> parkingList = new ArrayList<ParkingLot>();
+    	parkingList.add(parkingLot);
+    	this.parkingList = parkingList;
     }
 
-    public ParkingTicket park(Car car) {
+    public ParkingBoy(ArrayList<ParkingLot> parkingList) {
+		// TODO Auto-generated constructor stub
+    	this.parkingList = parkingList;
+	}
+
+	public ParkingTicket park(Car car) {
         // TODO: Please implement the method
-    	ParkingTicket parkingTicket = parkingLot.park(car);
+		ParkingTicket parkingTicket = null;
+		
+		for(ParkingLot parkingLot : parkingList) {
+			parkingTicket = parkingLot.park(car);
+			if(parkingTicket != null) {
+				break;
+			}
+		}
+		
     	if (parkingTicket == null) {
     		lastErrorMessage = "The parking lot is full.";
 		}else {
@@ -29,7 +46,14 @@ public class ParkingBoy {
 			return null;
 		}
     	
-    	Car car = parkingLot.fetch(ticket);
+    	Car car = null;
+    	for(ParkingLot parkingLot : parkingList) {
+			car = parkingLot.fetch(ticket);
+			if(car != null) {
+				break;
+			}
+		}
+    	
     	if (car == null) {
 			lastErrorMessage = "Unrecognized parking ticket.";
 			return null;
@@ -41,7 +65,7 @@ public class ParkingBoy {
         return lastErrorMessage;
     }
 
-	public ParkingLot getParkingLot() {
-		return parkingLot;
+	public ArrayList<ParkingLot> getParkingList() {
+		return parkingList;
 	}
 }
