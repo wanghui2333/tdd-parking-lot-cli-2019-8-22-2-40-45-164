@@ -174,8 +174,7 @@ class ParkingBoyFacts {
         	Car car = new Car();
 			cars.add(car);
 			
-			ParkingTicket ticket = parkingBoy.park(car);
-			tickets.add(ticket);
+			tickets.add(parkingBoy.park(car));
 			
 		}
         
